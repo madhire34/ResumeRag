@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: resumerag-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: CORS_ORIGIN
+        value: https://resumerag-mahanandireddy.netlify.app
