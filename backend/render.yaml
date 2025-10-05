@@ -12,3 +12,4 @@ services:
         value: 8000
       - key: CORS_ORIGIN
         value: https://resumerag-mahanandireddy.netlify.app
+
