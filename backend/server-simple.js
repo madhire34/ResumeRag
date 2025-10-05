@@ -188,3 +188,12 @@ app.listen(PORT, () => {
     console.log(`🚀 Simple Server running on port ${PORT}`);
     console.log(`📊 Demo mode - serving ${demoResumes.length} demo resumes`);
 });
+
+
+
+
+
+
+
+
+

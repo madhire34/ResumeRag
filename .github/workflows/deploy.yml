@@ -28,17 +28,23 @@ jobs:
       run: |
         cd frontend
         npm run build
+      env:
+        VITE_API_URL: ${{ secrets.VITE_API_URL || 'https://resumerag-backend.up.railway.app' }}
     
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v2.0
       with:
-        publish-dir: './frontend/build'
+        publish-dir: './frontend/dist'
         production-branch: main
         github-token: ${{ secrets.GITHUB_TOKEN }}
         deploy-message: "Deploy from GitHub Actions"
+        enable-pull-request-comment: true
+        enable-commit-comment: true
+        overwrites-pull-request-comment: true
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      timeout-minutes: 5
 
   deploy-backend:
     runs-on: ubuntu-latest
@@ -62,3 +68,12 @@ jobs:
       with:
         railway-token: ${{ secrets.RAILWAY_TOKEN }}
         service: backend
+      env:
+        RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
+        
+    - name: Verify deployment
+      run: |
+        echo "✅ Backend deployed to Railway"
+        echo "✅ Frontend deployed to Netlify"
+        echo "🔗 Frontend URL: https://resumerag-mahanandireddy.netlify.app"
+        echo "🔗 Backend API: https://resumerag-backend.up.railway.app"

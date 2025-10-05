@@ -2,6 +2,10 @@
 
 AI-powered resume analysis and search backend using RAG (Retrieval-Augmented Generation) with OpenAI embeddings.
 
+## Deployment
+
+The backend is deployed at: [https://resumerag-hdr3.onrender.com](https://resumerag-hdr3.onrender.com)
+
 ## Features
 
 - **PDF Resume Upload**: Upload and parse PDF resumes
@@ -54,6 +58,15 @@ npm run dev
 - Multer - File upload handling
 - PDF-parse - PDF text extraction
 - CORS - Cross-origin resource sharing
+
+
+
+
+
+
+
+
+
 
 
 
