@@ -1,5 +1,6 @@
 import express from "express";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import User from "../models/User.js";
 
 const router = express.Router();
@@ -80,6 +81,37 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ 
         error: "Email and password are required" 
       });
+    }
+
+    // Check if database is connected
+    if (mongoose.connection.readyState !== 1) {
+      console.log("Database not connected, using demo login");
+      
+      // Demo credentials
+      const demoUsers = {
+        'admin@mail.com': { password: 'admin123', name: 'Admin User', role: 'admin' },
+        'demo@resumerag.com': { password: 'demo123', name: 'Demo User', role: 'demo' },
+        'hr@company.com': { password: 'hr123', name: 'HR Manager', role: 'user' }
+      };
+      
+      const user = demoUsers[email];
+      if (user && user.password === password) {
+        const token = generateToken(Date.now().toString());
+        return res.json({
+          message: 'Logged in successfully (Demo Mode)',
+          user: {
+            id: Date.now().toString(),
+            name: user.name,
+            email: email,
+            role: user.role,
+          },
+          token: token,
+        });
+      } else {
+        return res.status(401).json({ 
+          error: "Invalid email or password" 
+        });
+      }
     }
 
     // Find user
