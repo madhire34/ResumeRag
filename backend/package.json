@@ -5,8 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server-simple.js",
+    "dev": "node server-simple.js",
+    "start-full": "node server.js"
   },
   "keywords": [
     "resume",
